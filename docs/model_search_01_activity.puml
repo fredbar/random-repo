@@ -1,0 +1,47 @@
+@startuml
+
+if (no data to work on)
+	:throw exception;
+	stop
+endif 
+:retrieve input;
+partition fastPass {
+while (countries remaining ?) is (yes)
+	:get next Country reference;
+	if ( country name or country code starts with input )
+		:return stored Country reference;
+		stop
+	endif 
+endwhile (end of list)
+}
+partition smartPass {
+	:define lowestScore at max;
+	while (countries remaining ?) is (yes)
+		:get next Country reference;
+		:get distance from input to shortened country name;
+		note right
+			shortened to avoid comparing
+			to a too long word.
+			We only compare to words of
+			at most same length than input.
+		end note
+		:get distance from input to shortened country code;
+		if (distance to name or code is inferior to lowestScore) then (found a better match)
+			:store Airport reference;
+			:store lowest of both distance;
+		endif
+	endwhile (end of list)
+	if (lowestScore over max limit) then (yes)
+		:return null;
+		note left
+			too great to be pertinent.
+			Score over 50% of source string
+			length are said to be bad.
+		 end note
+		stop
+	else (no)
+		:return stored Country reference;
+		stop
+	endif
+}
+@enduml

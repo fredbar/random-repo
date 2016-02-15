@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="main.java.com.lunatech.assessment.model">
+  <ClassDiagramComponents>
+    <Class name="Airport" package="com.lunatech.assessment.model" visibility="public" xPosition="782.0" yPosition="34.0">
+      <Fields>
+        <Field name="name" type="String" visibility="private" isFinal="true"/>
+        <Field name="runways" type="ArrayList&lt;Runway&gt;" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="add" returnType="void" visibility="public">
+          <Argument type="Runway" name="instance"/>
+        </Method>
+        <Method name="contains" returnType="boolean" visibility="public">
+          <Argument type="Runway" name="instance"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="get" returnType="Runway" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="iterator" returnType="Iterator&lt;Runway&gt;" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Country" package="com.lunatech.assessment.model" visibility="public" xPosition="139.0" yPosition="17.0">
+      <Fields>
+        <Field name="airports" type="ArrayList&lt;Airport&gt;" visibility="private" isFinal="true"/>
+        <Field name="code" type="String" visibility="private" isFinal="true"/>
+        <Field name="name" type="String" visibility="private" isFinal="true"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="code"/>
+          <Argument type="String" name="name"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="add" returnType="void" visibility="public">
+          <Argument type="Airport" name="newcomer"/>
+        </Method>
+        <Method name="contains" returnType="boolean" visibility="public">
+          <Argument type="Airport" name="target"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="getAirport" returnType="Airport" visibility="public">
+          <Argument type="int" name="index"/>
+        </Method>
+        <Method name="getCode" returnType="String" visibility="public"/>
+        <Method name="getName" returnType="String" visibility="public"/>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="iterator" returnType="Iterator&lt;Airport&gt;" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Runway" package="com.lunatech.assessment.model" visibility="public" xPosition="747.0" yPosition="340.0">
+      <Fields>
+        <Field name="orientation" type="int" visibility="private"/>
+        <Field name="length" type="float" visibility="private"/>
+        <Field name="surfaceType" type="SurfaceType" visibility="private"/>
+      </Fields>
+      <Constructors/>
+      <Methods>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="getOrientation" returnType="int" visibility="public"/>
+        <Method name="setOrientation" returnType="void" visibility="public">
+          <Argument type="int" name="orientation"/>
+        </Method>
+        <Method name="setOrientation" returnType="boolean" visibility="public">
+          <Argument type="String" name="orientation"/>
+        </Method>
+        <Method name="getLength" returnType="float" visibility="public"/>
+        <Method name="setLength" returnType="void" visibility="public">
+          <Argument type="float" name="length"/>
+        </Method>
+        <Method name="getSurfaceType" returnType="SurfaceType" visibility="public"/>
+        <Method name="setSurfaceType" returnType="void" visibility="public">
+          <Argument type="SurfaceType" name="surfaceType"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="SurfaceType" package="com.lunatech.assessment.model" visibility="public" xPosition="293.0" yPosition="340.0">
+      <Fields>
+        <Field name="cache" type="List&lt;SurfaceType&gt;" visibility="private" isStatic="true" isFinal="true"/>
+        <Field name="typeName" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="private"/>
+      </Constructors>
+      <Methods>
+        <Method name="instanciate" returnType="SurfaceType" visibility="public" isStatic="true">
+          <Argument type="String" name="typeName"/>
+        </Method>
+        <Method name="equals" returnType="boolean" visibility="public">
+          <Argument type="Object" name="obj"/>
+        </Method>
+        <Method name="hashCode" returnType="int" visibility="public"/>
+        <Method name="toString" returnType="String" visibility="public"/>
+      </Methods>
+    </Class>
+    <Interface name="LunaModel" package="com.lunatech.assessment.model" visibility="public" xPosition="124.0" yPosition="648.0">
+      <Methods>
+        <Method name="fillModel" returnType="void" visibility="public">
+          <Argument type="InputStreamReader" name="countries"/>
+          <Argument type="InputStreamReader" name="airports"/>
+          <Argument type="InputStreamReader" name="runways"/>
+        </Method>
+        <Method name="guessCountry" returnType="Country" visibility="public">
+          <Argument type="String" name="name"/>
+        </Method>
+        <Method name="sortByAirportCount" returnType="Collection&lt;Country&gt;" visibility="public">
+          <Argument type="boolean" name="ascendingSort"/>
+          <Argument type="int" name="limit"/>
+        </Method>
+        <Method name="reportSurfaceTypes" returnType="Map&lt;String, Collection&lt;SurfaceType&gt;&gt;" visibility="public"/>
+        <Method name="sortByLattitude" returnType="Map&lt;String, Collection&lt;Runway&gt;&gt;" visibility="public"/>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <UseRelation source="com.lunatech.assessment.model.LunaModel" target="com.lunatech.assessment.model.Country" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.lunatech.assessment.model.Country" target="com.lunatech.assessment.model.Airport" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="runways" source="com.lunatech.assessment.model.Airport" target="com.lunatech.assessment.model.Runway" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Runway&gt;"/>
+    <UseRelation source="com.lunatech.assessment.model.Runway" target="com.lunatech.assessment.model.SurfaceType" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="airports" source="com.lunatech.assessment.model.Country" target="com.lunatech.assessment.model.Airport" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="ArrayList&lt;Airport&gt;"/>
+    <UseRelation source="com.lunatech.assessment.model.LunaModel" target="com.lunatech.assessment.model.SurfaceType" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cache" source="com.lunatech.assessment.model.SurfaceType" target="com.lunatech.assessment.model.SurfaceType" type="Aggregation" sourceCardinality="1..1" targetCardinality="0..*" collectionType="List&lt;SurfaceType&gt;"/>
+    <HasRelation name="surfaceType" source="com.lunatech.assessment.model.Runway" target="com.lunatech.assessment.model.SurfaceType" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.lunatech.assessment.model.LunaModel" target="com.lunatech.assessment.model.Runway" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.lunatech.assessment.model.SurfaceType" target="com.lunatech.assessment.model.SurfaceType" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="com.lunatech.assessment.model.Airport" target="com.lunatech.assessment.model.Runway" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>

@@ -1,0 +1,19 @@
+@startuml
+
+:init Country list;
+:init Airport list;
+while (remaining entries in country file ?) is (yes)
+	:parse, fill, insert into Country list;
+endwhile (end of list)
+while (remaining entries in airport file ?) is (yes)
+	:parse, fill, insert into Airport list;
+	:find country instance and link to Airport instance;
+endwhile (end of list)
+while (remaining entries in runway file ?) is (yes)
+	:create Runway instance, parse, fill;
+	:call SurfaceType factory;
+	:link SurfaceType to Runway;
+	:find Airport instance and link to Runway instance;
+endwhile (end of list)
+stop
+@enduml
