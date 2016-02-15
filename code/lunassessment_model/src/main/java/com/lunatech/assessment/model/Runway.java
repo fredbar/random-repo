@@ -155,7 +155,7 @@ public class Runway
      * Parses orientation from a string and sets the correct angle into the
      * instance.
      * If the orientation is for a helicopter, ice or water runway,
-     * orientation will be set to a negative value and length will be 0.
+     * orientation will be set to -1 and length will be 0.
      * If the orientation is for a plane runway, the object instance will have
      * its orientation correctly set.
      * Here is how values will be treated:
@@ -170,6 +170,8 @@ public class Runway
      * <li>values like N/NE/E/SE/S/SW/W/NW will be converted to the correct
      * value, 5 degrees less for intercardinal directions.( NE, thus 45° will be
      * 04)</li>
+     * <li>invalid values will change orientation to -2 so that one knows it is
+     * invalid.False will be returned.</li>
      * </ul>
      *
      * @param orientation String representing the orientation to parse, case
