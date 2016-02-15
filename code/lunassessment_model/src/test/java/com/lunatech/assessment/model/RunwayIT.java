@@ -8,7 +8,9 @@ package com.lunatech.assessment.model;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -45,22 +47,6 @@ public class RunwayIT
     }
 
     /**
-     * Test of equals method, of class Runway.
-     */
-    @Test
-    public void testEquals()
-    {
-        System.out.println( "equals" );
-        Object obj = null;
-        Runway instance = new Runway();
-        boolean expResult = false;
-        boolean result = instance.equals( obj );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
-    /**
      * Test of getLength method, of class Runway.
      */
     @Test
@@ -68,11 +54,10 @@ public class RunwayIT
     {
         System.out.println( "getLength" );
         Runway instance = new Runway();
-        float expResult = 0.0F;
+        float expResult = 10.0F;
+        instance.setLength( expResult );
         float result = instance.getLength();
         assertEquals( expResult, result, 0.0 );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
     }
 
     /**
@@ -83,11 +68,10 @@ public class RunwayIT
     {
         System.out.println( "getOrientation" );
         Runway instance = new Runway();
-        int expResult = 0;
+        int expResult = 10;
+        instance.setOrientation( expResult );
         int result = instance.getOrientation();
         assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
     }
 
     /**
@@ -98,26 +82,10 @@ public class RunwayIT
     {
         System.out.println( "getSurfaceType" );
         Runway instance = new Runway();
-        SurfaceType expResult = null;
+        SurfaceType expResult = SurfaceType.instanciate( "ASPH" );
+        instance.setSurfaceType( expResult );
         SurfaceType result = instance.getSurfaceType();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
-    /**
-     * Test of hashCode method, of class Runway.
-     */
-    @Test
-    public void testHashCode()
-    {
-        System.out.println( "hashCode" );
-        Runway instance = new Runway();
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertSame( expResult, result );
     }
 
     /**
@@ -127,27 +95,204 @@ public class RunwayIT
     public void testSetLength()
     {
         System.out.println( "setLength" );
-        float length = 0.0F;
+        float length = 10.0F;
         Runway instance = new Runway();
         instance.setLength( length );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertEquals( length, instance.getLength(), 0.0 );
     }
 
     /**
      * Test of setOrientation method, of class Runway.
      */
     @Test
-    public void testSetOrientation_String()
+    public void testSetOrientation_String_001()
     {
-        System.out.println( "setOrientation" );
-        String orientation = "";
+        System.out.println( "setOrientation: real angle" );
+        String orientation = "10";
         Runway instance = new Runway();
-        boolean expResult = false;
-        boolean result = instance.setOrientation( orientation );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 10, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_002()
+    {
+        System.out.println( "setOrientation: real angle plus character" );
+        String orientation = "10W";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 10, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_003()
+    {
+        System.out.println( "setOrientation: cardinality N" );
+        String orientation = "N";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 360, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_004()
+    {
+        System.out.println( "setOrientation: cardinality NE" );
+        String orientation = "NE";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 40, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_005()
+    {
+        System.out.println( "setOrientation: cardinality E" );
+        String orientation = "E";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 90, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_006()
+    {
+        System.out.println( "setOrientation: cardinality SE" );
+        String orientation = "SE";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 130, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_007()
+    {
+        System.out.println( "setOrientation: cardinality S" );
+        String orientation = "S";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 180, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_008()
+    {
+        System.out.println( "setOrientation: cardinality SW" );
+        String orientation = "SW";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 220, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_009()
+    {
+        System.out.println( "setOrientation: cardinality W" );
+        String orientation = "W";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 270, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_010()
+    {
+        System.out.println( "setOrientation: cardinality NW" );
+        String orientation = "NW";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 310, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_011()
+    {
+        System.out.println( "setOrientation: cardinality N" );
+        String orientation = "N";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertEquals( 360, instance.getOrientation() );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_012()
+    {
+        System.out.println( "setOrientation: FFA" );
+        String orientation = "ALL";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertTrue( instance.getOrientation() < 0 );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_013()
+    {
+        System.out.println( "setOrientation: helicopter pad" );
+        String orientation = "H1";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertTrue( instance.getOrientation() < 0 );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_014()
+    {
+        System.out.println( "setOrientation: helicopter pad, second" );
+        String orientation = "H2";
+        Runway instance = new Runway();
+        assertTrue( instance.setOrientation( orientation ) );
+        assertTrue( instance.getOrientation() < 0 );
+    }
+
+    /**
+     * Test of setOrientation method, of class Runway.
+     */
+    @Test
+    public void testSetOrientation_String_015()
+    {
+        System.out.println( "setOrientation: erroneous entry" );
+        String orientation = "Bla";
+        Runway instance = new Runway();
+        assertFalse( instance.setOrientation( orientation ) );
     }
 
     /**
@@ -156,12 +301,11 @@ public class RunwayIT
     @Test
     public void testSetOrientation_int()
     {
-        System.out.println( "setOrientation" );
-        int orientation = 0;
+        System.out.println( "setOrientation int" );
+        int orientation = 10;
         Runway instance = new Runway();
         instance.setOrientation( orientation );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertEquals( orientation, instance.getOrientation() );
     }
 
     /**
@@ -171,26 +315,10 @@ public class RunwayIT
     public void testSetSurfaceType()
     {
         System.out.println( "setSurfaceType" );
-        SurfaceType surfaceType = null;
+        SurfaceType surfaceType = SurfaceType.instanciate( "ASPH" );
         Runway instance = new Runway();
         instance.setSurfaceType( surfaceType );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
-    /**
-     * Test of toString method, of class Runway.
-     */
-    @Test
-    public void testToString()
-    {
-        System.out.println( "toString" );
-        Runway instance = new Runway();
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertSame( instance.getSurfaceType(), surfaceType );
     }
 
 }

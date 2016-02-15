@@ -1,22 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.lunatech.assessment.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**
  *
- * @author Fred
+ * @author eric Barachant
  */
 public class AirportIT
 {
@@ -52,11 +49,10 @@ public class AirportIT
     public void testAdd()
     {
         System.out.println( "add" );
-        Runway instance_2 = null;
-        Airport instance = null;
+        Runway instance_2 = new Runway();
+        Airport instance = new Airport( "test" );
         instance.add( instance_2 );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertSame( instance_2, instance.get( 0 ) );//will not test get(), as it is checked here.
     }
 
     /**
@@ -66,29 +62,34 @@ public class AirportIT
     public void testContains()
     {
         System.out.println( "contains" );
-        Runway instance_2 = null;
-        Airport instance = null;
-        boolean expResult = false;
-        boolean result = instance.contains( instance_2 );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        Runway instance_2 = new Runway();
+        Airport instance = new Airport( "test" );
+        instance.add( instance_2 );
+        assertTrue( instance.contains( instance_2 ) );
     }
 
     /**
      * Test of equals method, of class Airport.
      */
     @Test
-    public void testEquals()
+    public void testEquals_001()
     {
+        // testing same objects, no runway
         System.out.println( "equals" );
-        Object obj = null;
-        Airport instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals( obj );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        Object obj = new Airport( "test" );
+        Airport instance = new Airport( "test" );
+        assertEquals( obj, instance );
+    }
+
+    @Test
+    public void testEquals_002()
+    {
+        // testing same objects, no runway on one of them. Runway list is not tested so it should not bother.
+        System.out.println( "equals" );
+        Airport obj = new Airport( "test" );
+        obj.add( new Runway() );
+        Airport instance = new Airport( "test" );
+        assertEquals( obj, instance );
     }
 
     /**
@@ -98,13 +99,13 @@ public class AirportIT
     public void testGet()
     {
         System.out.println( "get" );
-        int index = 0;
-        Airport instance = null;
-        Runway expResult = null;
-        Runway result = instance.get( index );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        Runway r1 = new Runway();
+        Runway r2 = new Runway();
+        Airport instance = new Airport( "test" );
+        instance.add( r1 );
+        instance.add( r2 );
+        assertSame( r1, instance.get( 0 ) );
+        assertSame( r2, instance.get( 1 ) );
     }
 
     /**
@@ -114,27 +115,10 @@ public class AirportIT
     public void testGetName()
     {
         System.out.println( "getName" );
-        Airport instance = null;
-        String expResult = "";
+        String expected = "test";
+        Airport instance = new Airport( expected );
         String result = instance.getName();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
-    /**
-     * Test of hashCode method, of class Airport.
-     */
-    @Test
-    public void testHashCode()
-    {
-        System.out.println( "hashCode" );
-        Airport instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertEquals( expected, result );
     }
 
     /**
@@ -144,27 +128,25 @@ public class AirportIT
     public void testIterator()
     {
         System.out.println( "iterator" );
-        Airport instance = null;
-        Iterator<Runway> expResult = null;
-        Iterator<Runway> result = instance.iterator();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
-    /**
-     * Test of toString method, of class Airport.
-     */
-    @Test
-    public void testToString()
-    {
-        System.out.println( "toString" );
-        Airport instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        // testing that an iterator is returned and that the content is the same as the one i entered, in same order.
+        Runway r1 = new Runway();
+        Runway r2 = new Runway();
+        Runway r3 = new Runway();
+        Airport instance = new Airport( "test" );
+        instance.add( r1 );
+        instance.add( r2 );
+        instance.add( r3 );
+        ArrayList<Runway> expected = new ArrayList();
+        expected.add( r1 );
+        expected.add( r2 );
+        expected.add( r3 );
+        Iterator<Runway> iterator = instance.iterator();
+        ArrayList<Runway> result = new ArrayList<>();
+        while ( true == iterator.hasNext() )
+        {
+            result.add( iterator.next() );
+        }
+        assertEquals( expected, result );
     }
 
 }

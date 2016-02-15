@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.lunatech.assessment.model;
 
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertSame;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -45,34 +41,24 @@ public class SurfaceTypeIT
     }
 
     /**
-     * Test of equals method, of class SurfaceType.
+     * Test of equals method, of class Runway.
      */
     @Test
-    public void testEquals()
+    public void testEquals_001()
     {
-        System.out.println( "equals" );
-        Object obj = null;
-        SurfaceType instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals( obj );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        System.out.println( "equals_001" );
+        SurfaceType t1 = SurfaceType.instanciate( "ASPH" );
+        SurfaceType t2 = SurfaceType.instanciate( "ASPH" );//we should have the same instance on second call
+        assertSame( t1, t2 );
     }
 
-    /**
-     * Test of hashCode method, of class SurfaceType.
-     */
     @Test
-    public void testHashCode()
+    public void testEquals_002()
     {
-        System.out.println( "hashCode" );
-        SurfaceType instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        System.out.println( "equals_002" );
+        SurfaceType t1 = SurfaceType.instanciate( "ASPH" );
+        SurfaceType t2 = SurfaceType.instanciate( "GRAV" );//we should get different instances.
+        assertNotSame( t1, t2 );
     }
 
     /**
@@ -82,27 +68,8 @@ public class SurfaceTypeIT
     public void testInstanciate()
     {
         System.out.println( "instanciate" );
-        String typeName = "";
-        SurfaceType expResult = null;
-        SurfaceType result = SurfaceType.instanciate( typeName );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        final String type = "ASPH";
+        SurfaceType t1 = SurfaceType.instanciate( type );
+        assertEquals( t1.getTypeName(), type );
     }
-
-    /**
-     * Test of toString method, of class SurfaceType.
-     */
-    @Test
-    public void testToString()
-    {
-        System.out.println( "toString" );
-        SurfaceType instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
 }

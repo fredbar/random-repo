@@ -1,15 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.lunatech.assessment.model;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,11 +49,10 @@ public class CountryIT
     public void testAdd()
     {
         System.out.println( "add" );
-        Airport newcomer = null;
-        Country instance = null;
+        Airport newcomer = new Airport( "test" );
+        Country instance = new Country( "a", "b" );
         instance.add( newcomer );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        assertSame( newcomer, instance.getAirport( 0 ) );//will not test getAirport(), as it is checked here.
     }
 
     /**
@@ -66,45 +62,36 @@ public class CountryIT
     public void testContains()
     {
         System.out.println( "contains" );
-        Airport target = null;
-        Country instance = null;
-        boolean expResult = false;
-        boolean result = instance.contains( target );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        Airport target = new Airport( "test" );
+        Country instance = new Country( "a", "b" );
+        instance.add( target );
+        assertTrue( instance.contains( target ) );
     }
 
     /**
      * Test of equals method, of class Country.
      */
     @Test
-    public void testEquals()
+    public void testEquals_001()
     {
-        System.out.println( "equals" );
-        Object obj = null;
-        Country instance = null;
-        boolean expResult = false;
-        boolean result = instance.equals( obj );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        System.out.println( "equals_001" );
+        Country instance1 = new Country( "a", "b" );
+        Country instance2 = new Country( "a", "b" );
+        assertEquals( instance1, instance2 );
     }
 
     /**
-     * Test of getAirport method, of class Country.
+     * Test of equals method, of class Country.
      */
     @Test
-    public void testGetAirport()
+    public void testEquals_002()
     {
-        System.out.println( "getAirport" );
-        int index = 0;
-        Country instance = null;
-        Airport expResult = null;
-        Airport result = instance.getAirport( index );
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        System.out.println( "equals_002" );
+        //only name and code are discriminating, so other information is ignored in equals(). This should not bother.
+        Country instance1 = new Country( "a", "b" );
+        Country instance2 = new Country( "a", "b" );
+        instance2.add( new Airport( "test" ) );
+        assertEquals( instance1, instance2 );
     }
 
     /**
@@ -114,12 +101,8 @@ public class CountryIT
     public void testGetCode()
     {
         System.out.println( "getCode" );
-        Country instance = null;
-        String expResult = "";
-        String result = instance.getCode();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        Country instance = new Country( "a", "b" );
+        assertEquals( "a", instance.getCode() );
     }
 
     /**
@@ -129,27 +112,8 @@ public class CountryIT
     public void testGetName()
     {
         System.out.println( "getName" );
-        Country instance = null;
-        String expResult = "";
-        String result = instance.getName();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
-
-    /**
-     * Test of hashCode method, of class Country.
-     */
-    @Test
-    public void testHashCode()
-    {
-        System.out.println( "hashCode" );
-        Country instance = null;
-        int expResult = 0;
-        int result = instance.hashCode();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        Country instance = new Country( "a", "b" );
+        assertEquals( "b", instance.getName() );
     }
 
     /**
@@ -159,27 +123,25 @@ public class CountryIT
     public void testIterator()
     {
         System.out.println( "iterator" );
-        Country instance = null;
-        Iterator<Airport> expResult = null;
-        Iterator<Airport> result = instance.iterator();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
-    }
+        Country instance = new Country( "a", "b" );
+        Airport a1 = new Airport( "test1" );
+        Airport a2 = new Airport( "test2" );
+        Airport a3 = new Airport( "test3" );
+        instance.add( a1 );
+        instance.add( a2 );
+        instance.add( a3 );
 
-    /**
-     * Test of toString method, of class Country.
-     */
-    @Test
-    public void testToString()
-    {
-        System.out.println( "toString" );
-        Country instance = null;
-        String expResult = "";
-        String result = instance.toString();
-        assertEquals( expResult, result );
-        // TODO review the generated test code and remove the default call to fail.
-        fail( "The test case is a prototype." );
+        ArrayList<Airport> expected = new ArrayList<Airport>();
+        expected.add( a1 );
+        expected.add( a2 );
+        expected.add( a3 );
+        ArrayList<Airport> result = new ArrayList<Airport>();
+        Iterator<Airport> iterator = instance.iterator();
+        while ( true == iterator.hasNext() )
+        {
+            result.add( iterator.next() );
+        }
+        assertEquals( expected, result );//ought to get same list and same ordering.
     }
 
 }

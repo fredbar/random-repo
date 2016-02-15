@@ -1,6 +1,7 @@
 package com.lunatech.assessment.model;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
 
@@ -28,7 +29,20 @@ public class SurfaceType
      */
     public static SurfaceType instanciate( final String typeName )
     {
-        throw new UnsupportedOperationException( "not implemented" );
+        //TODO: could eventually be accelerated if using a hashmap(type as key, instance as value). Profile and replace if necessary.
+        assert null != typeName;
+        for ( Iterator<SurfaceType> iterator = cache.iterator(); iterator.hasNext(); )
+        {
+            SurfaceType next = iterator.next();
+            if ( next.getTypeName().equals( typeName ) )
+            {
+                return next;
+            }
+        }
+        // no instance found in cache, creating one and adding it to the cache.
+        SurfaceType result = new SurfaceType( typeName );
+        cache.add( result );
+        return result;
     }
 
     /**
