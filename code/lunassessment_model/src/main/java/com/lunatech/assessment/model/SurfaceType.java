@@ -35,11 +35,11 @@ public class SurfaceType
      * type of the surface. Can eventually be a composition of two types,
      * seperated with a hyphen.
      */
-    private String typeName;
+    private final String typeName;
 
-    private SurfaceType()
+    private SurfaceType( String typeName )
     {
-        // private default constructor to ensure factory is used.
+        this.typeName = typeName;
     }
 
     @Override
@@ -59,6 +59,16 @@ public class SurfaceType
             return false;
         }
         return true;
+    }
+
+    /**
+     * Returns the surface name, given at construction.
+     *
+     * @return the surface name
+     */
+    public String getTypeName()
+    {
+        return this.typeName;
     }
 
     @Override
