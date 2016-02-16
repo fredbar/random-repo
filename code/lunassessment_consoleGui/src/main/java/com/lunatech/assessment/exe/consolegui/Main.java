@@ -1,8 +1,10 @@
 package com.lunatech.assessment.exe.consolegui;
 
+import com.lunatech.assessment.model.Airport;
 import com.lunatech.assessment.model.Country;
 import com.lunatech.assessment.model.LatitudeScore;
 import com.lunatech.assessment.model.OldschoolLunaModel;
+import com.lunatech.assessment.model.Runway;
 import com.lunatech.assessment.model.SurfaceType;
 import com.lunatech.assessment.model.ValidationExecutable;
 import java.io.Console;
@@ -11,6 +13,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
@@ -76,6 +79,22 @@ public class Main
                         else
                         {
                             System.err.println( "Thank you. I found this:\n" + result.getName() );
+                            int count = result.getAirportCount();
+                            System.err.println( String.format( "This country has %d airports.\n", count ) );
+                            c.readLine( "press enter to see them now." );
+                            final Iterator<Airport> airportIterator = result.iterator();
+                            while ( airportIterator.hasNext() )
+                            {
+                                Airport airport = airportIterator.next();
+                                System.err.println( String.format( "- %s, that has those runways:", airport.getName() ) );
+                                Iterator<Runway> runwayIterator = airport.iterator();
+                                while ( runwayIterator.hasNext() )
+                                {
+                                    Runway runway = runwayIterator.next();
+                                    System.err.println( String.format( "\t- %02d, %04.02f feet long, in %s ", ( runway.getOrientation() / 10 ) - 1, runway.getLength(), runway.getSurfaceType().getTypeName() ) );
+                                }
+                                System.err.println( "" );
+                            }
                         }
                 }
             }
