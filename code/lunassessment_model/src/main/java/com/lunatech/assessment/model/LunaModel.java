@@ -3,6 +3,7 @@ package com.lunatech.assessment.model;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -90,15 +91,10 @@ public interface LunaModel
     /**
      * Lists all countries, sorted by the airport count.
      *
-     * @param ascendingSort <code>true</code> if the results must be ordered in
-     * ascending way, <code>false</code> otherwise
-     * @param limit a result count to stop at. If limit is inferior to model
-     * element count, that count will be returned without any notice.
-     *
-     * @return A collection of countries, at most of the size given in
-     * parameter.·
+     * @return A collection of countries, ordered from highest to lowest airport
+     * count.
      */
-    public Collection<Country> sortByAirportCount( final boolean ascendingSort, final int limit );
+    public List<Country> sortByAirportCount();
 
     /**
      * Reports all surface types per country.
@@ -110,12 +106,13 @@ public interface LunaModel
     public Map<String, Collection<SurfaceType>> reportSurfaceTypes();
 
     /**
-     * Filters so that we get a list of countries and their arrangement using
-     * latitude as a discriminant.
+     * Counts occurences of lattitudes and returns an array of 36 integers.
+     * Each entry in the array represents the count at each possible
+     * orientation, starting at 10 degrees and ending at 360.
      *
-     * @return a map where latitude is key and value is a Collection of Runway
-     * objects onder that latitude.
+     * @return an array representing the count for each and every possible 36
+     * cardinal direction.
      */
-    public Map<String, Collection<Runway>> sortByLattitude();
+    public LatitudeScore[] sortByLattitude();
 
 }

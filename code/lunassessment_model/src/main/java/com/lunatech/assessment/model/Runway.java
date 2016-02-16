@@ -189,8 +189,16 @@ public class Runway
         if ( null != candidate )
         {
             //that was a value, let's store it and exit.
-            this.orientation = candidate;
-            return true;
+            if ( candidate > 36 | 0 == candidate )
+            {
+                this.orientation = -2;
+                return false;
+            }
+            else
+            {
+                this.orientation = candidate * 10;
+                return true;
+            }
         }
         else
         {
@@ -199,8 +207,16 @@ public class Runway
             if ( null != candidate )
             {
                 //that was a value with a letter, let's store it and exit.
-                this.orientation = candidate;
-                return true;
+                if ( candidate > 36 | 0 == candidate )
+                {
+                    this.orientation = -2;
+                    return false;
+                }
+                else
+                {
+                    this.orientation = candidate * 10;
+                    return true;
+                }
             }
             else
             {

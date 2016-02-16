@@ -112,6 +112,16 @@ public class Country
     }
 
     /**
+     * returns the count of airports of this country.
+     *
+     * @return the airport count
+     */
+    public int getAirportCount()
+    {
+        return this.airports.size();
+    }
+
+    /**
      * Returns code of the country, as defined in iso-3166
      *
      * @return code of the country, as defined in iso-3166
@@ -154,7 +164,7 @@ public class Country
     @Override
     public String toString()
     {
-        return "Country{" + "airports=" + airports + ", code=" + code + ", name=" + name + '}';
+        return "Country{" + ", name=" + name + ", code=" + code + "airports=" + airports + '}';
     }
 
 }
