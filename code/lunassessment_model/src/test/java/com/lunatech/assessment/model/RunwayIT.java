@@ -111,7 +111,7 @@ public class RunwayIT
         String orientation = "10";
         Runway instance = new Runway();
         assertTrue( instance.setOrientation( orientation ) );
-        assertEquals( 10, instance.getOrientation() );
+        assertEquals( 100, instance.getOrientation() );
     }
 
     /**
@@ -124,7 +124,7 @@ public class RunwayIT
         String orientation = "10W";
         Runway instance = new Runway();
         assertTrue( instance.setOrientation( orientation ) );
-        assertEquals( 10, instance.getOrientation() );
+        assertEquals( 100, instance.getOrientation() );
     }
 
     /**

@@ -190,12 +190,14 @@ public class OldschoolLunaModel implements LunaModel
                 bestMatch = country;
             }
         }
-        if ( bestDistance < 0.1 )
+        if ( bestDistance < 0.85 )
         {//if score is too low, the result might be too far from anything logical. Better return nothing not to trouble user.
+            System.err.println( String.format( "closest:%s with %f", bestMatch.getName(), bestDistance ) );//finetuning 
             return null;//TODO: this is not the domain of the search. This should be filtered by the GUI. Refactor and return a tuple object (score/instance) and let the GUI take the decision.
         }
         else
         {
+            System.err.println( "distance: " + bestDistance );//to finetune distance
             return bestMatch;
         }
     }
