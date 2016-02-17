@@ -12,6 +12,17 @@ public class LatitudeScore implements Comparable
 
     private int orientation;
 
+    LatitudeScore( int orientation, int count )
+    {
+        this.orientation = orientation;
+        this.count = count;
+    }
+
+    LatitudeScore()
+    {
+        throw new UnsupportedOperationException( "Not supported yet." ); //To change body of generated methods, choose Tools | Templates.
+    }
+
     @Override
     public int compareTo( Object o )
     {
