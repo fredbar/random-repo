@@ -221,7 +221,8 @@ public class UptodateLunaModel implements LunaModel
     @Override
     public LatitudeScore[] sortByLattitude()
     {
-        return this.runwayList
+        long start = System.nanoTime();
+        LatitudeScore[] toArray = this.runwayList
                 .stream()
                 .collect(
                         Collectors.groupingBy(
@@ -244,6 +245,9 @@ public class UptodateLunaModel implements LunaModel
                         Collectors.toList()
                 )
                 .toArray( new LatitudeScore[0] );
+        double time = ( System.nanoTime() - start ) / 1000000.;
+        System.err.println( String.format( "sorted runways in %.02fms", time ) );
+        return toArray;
     }
 
 }

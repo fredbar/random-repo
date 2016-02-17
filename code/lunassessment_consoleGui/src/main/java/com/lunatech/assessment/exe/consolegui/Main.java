@@ -4,9 +4,9 @@ import com.lunatech.assessment.model.Airport;
 import com.lunatech.assessment.model.Country;
 import com.lunatech.assessment.model.LatitudeScore;
 import com.lunatech.assessment.model.LunaModel;
+import com.lunatech.assessment.model.OldschoolLunaModel;
 import com.lunatech.assessment.model.Runway;
 import com.lunatech.assessment.model.SurfaceType;
-import com.lunatech.assessment.model.UptodateLunaModel;
 import com.lunatech.assessment.model.ValidationExecutable;
 import java.io.Console;
 import java.io.FileNotFoundException;
@@ -46,7 +46,7 @@ public class Main
         try
         {
             System.out.println( "Please wait while loading dataset." );
-            this.model = new UptodateLunaModel();
+            this.model = new OldschoolLunaModel();
             InputStream countriesStream = getClass().getClassLoader().getResourceAsStream( "countries.csv" );
             InputStream airportStream = getClass().getClassLoader().getResourceAsStream( "airports.csv" );
             InputStream runwaysStream = getClass().getClassLoader().getResourceAsStream( "runways.csv" );
